@@ -2,8 +2,9 @@
   "name": "ads_project",
   "version": "1.0.0",
   "description": "Eine barrierefreie und responsive Web-Komponente auf Basis nativer Web-Technologien.",
-  "main": "index.js",
   "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -13,11 +14,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/carinalehwald-work/frontend-typescript-engineer-task/issues"
-  },
-  "homepage": "https://github.com/carinalehwald-work/frontend-typescript-engineer-task#readme",
+  "type": "module",
   "devDependencies": {
     "typescript": "^7.0.2"
   }
