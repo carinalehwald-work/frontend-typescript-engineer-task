@@ -39,6 +39,10 @@ class ServiceTabs extends HTMLElement {
   private updateMode(): void {
     const isDesktop = this.mediaQuery.matches;
 
+    if (isDesktop && this.activeIndex === -1) {
+      this.activeIndex = 0;
+    }
+
     this.applyMode(isDesktop);
 
     const tabList = this.tabList;
@@ -110,9 +114,12 @@ class ServiceTabs extends HTMLElement {
       const button = document.createElement("button");
       const item = document.createElement("div");
       item.className = "service-item";
+      panel.classList.add("service-panel");
 
       button.type = "button";
-      button.textContent = title;
+      const titleElement = document.createElement("span");
+      titleElement.textContent = title;
+      button.appendChild(titleElement);
 
       const panelId = `${this.instanceId}-panel-${index}`;
       const buttonId = `${this.instanceId}-tab-${index}`;
@@ -133,7 +140,12 @@ class ServiceTabs extends HTMLElement {
       });
 
       button.addEventListener("click", () => {
-        this.activeIndex = index;
+        if (this.mediaQuery.matches) {
+          this.activeIndex = index;
+        } else {
+          this.activeIndex = this.activeIndex === index ? -1 : index;
+        }
+
         this.updateMode();
       });
 

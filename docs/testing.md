@@ -28,6 +28,8 @@ Die Testdokumentation wird fortlaufend aktualisiert.
 * [x] Die Navigation ist nicht zyklisch.
 * [x] Am ersten bzw. letzten Element wird nicht über die Grenzen hinaus navigiert.
 * [x] `Tab` und `Shift + Tab` behalten das normale Browser-Fokusverhalten bei.
+* [x] Ein geöffneter Bereich kann durch erneuten Klick wieder geschlossen werden.
+* [x] Es können alle Bereiche gleichzeitig geschlossen sein.
 
 ### Tab-Navigation auf Desktop-Bildschirmgrößen
 
@@ -55,7 +57,8 @@ Die Testdokumentation wird fortlaufend aktualisiert.
 * [x] Ab 800px wird die Tab-Darstellung verwendet.
 * [x] Beim Verkleinern des Browserfensters wird die Darstellung angepasst.
 * [x] Beim Vergrößern des Browserfensters wird die Darstellung angepasst.
-* [x] Der aktuell aktive Bereich bleibt beim Wechsel der Bildschirmgröße erhalten.
+* [x] Der aktuell aktive Bereich bleibt beim Wechsel der Bildschirmgröße erhalten, sofern ein Bereich aktiv ist.
+* [x] Beim Wechsel aus einem vollständig geschlossenen Mobile-Accordion wird im Desktop-Modus der erste Tab aktiv.
 * [x] Beim Wechsel zwischen Mobile- und Desktop-Modus befinden sich die Navigationsbuttons jeweils im vorgesehenen Container.
 * [ ] Fokusverhalten beim Wechsel über die 800px-Grenze prüfen.
 

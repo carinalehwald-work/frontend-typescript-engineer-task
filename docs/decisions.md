@@ -237,6 +237,20 @@ Durch `activeIndex` kann die Komponente bei einem Wechsel der Bildschirmgröße 
 
 Dadurch wird die responsive Darstellung von der eigentlichen Zustandsverwaltung getrennt.
 
+### Besonderheit im Mobile-Modus
+
+Im Mobile-Modus kann `activeIndex` den Wert `-1` annehmen. Dieser Zustand bedeutet, dass aktuell kein Bereich geöffnet ist.
+
+Ein bereits geöffneter Bereich kann durch erneuten Klick auf seinen Button geschlossen werden. Dadurch können im Mobile-Modus bewusst **alle Bereiche gleichzeitig geschlossen** sein.
+
+Im Desktop-Modus ist dieser Zustand dagegen nicht vorgesehen, da bei einer Tab-Navigation immer ein Tab aktiv sein muss. Wird vom Mobile-Modus mit vollständig geschlossenem Accordion in den Desktop-Modus gewechselt, wird deshalb automatisch der erste Bereich (`activeIndex = 0`) aktiviert.
+
+Damit gelten folgende Zustände:
+
+* **Mobile:** `activeIndex >= 0` → ein Bereich ist geöffnet
+* **Mobile:** `activeIndex = -1` → alle Bereiche sind geschlossen
+* **Desktop:** `activeIndex >= 0` → genau ein Tab ist aktiv
+
 ---
 
 ## 11. Breakpoint bei 800px
