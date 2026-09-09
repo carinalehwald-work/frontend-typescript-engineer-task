@@ -311,7 +311,13 @@ Die Tastaturbedienung orientiert sich an den Interaktionsmustern des WAI-ARIA Au
 
 Im Desktop-Modus bewegen `ArrowLeft` und `ArrowRight` den Fokus zwischen den Tabs.
 
-Die Navigation verwendet dabei automatische Aktivierung: Der fokussierte Tab wird gleichzeitig zum aktiven Tab.
+Die Pfeiltasten verschieben dabei zunächst **nur den Fokus**. Der fokussierte Tab wird nicht automatisch aktiviert.
+
+Die Aktivierung erfolgt anschließend bewusst durch die normale Button-Interaktion, beispielsweise über `Enter`, `Space` oder einen Mausklick.
+
+Dadurch werden **Fokus und aktiver Zustand voneinander getrennt**. Nutzer können zunächst zwischen den Tabs navigieren und anschließend gezielt einen Tab aktivieren.
+
+Die Navigation ist nicht zyklisch. Beim ersten bzw. letzten Tab wird die Navigation in der jeweiligen Richtung beendet.
 
 ### Mobile: Akkordeon
 
@@ -321,6 +327,8 @@ Der fokussierte Bereich wird dabei **nicht automatisch geöffnet**.
 
 Die Aktivierung erfolgt über das native Button-Verhalten mit `Enter` oder `Space`.
 
+Ein bereits geöffneter Bereich kann durch erneute Aktivierung seines Buttons geschlossen werden.
+
 ### `Home` und `End`
 
 `Home` und `End` werden für die Navigation nicht zusätzlich implementiert.
@@ -329,9 +337,13 @@ Die Navigation unterstützt bewusst nur die für die jeweiligen Interaktionsmode
 
 ### Begründung
 
-Die beiden Darstellungsformen verwenden unterschiedliche Interaktionsmodelle. Die Tastaturbedienung wird deshalb an das jeweilige Muster angepasst, anstatt das Verhalten der beiden Modi künstlich zu vereinheitlichen.
+Die beiden Darstellungsformen verwenden unterschiedliche Interaktionsmodelle.
 
-Dadurch entspricht die Interaktion stärker den etablierten Accessibility-Mustern für Tabs und Akkordeons.
+Sowohl im Desktop- als auch im Mobile-Modus wird bei der Pfeiltastennavigation zunächst ausschließlich der Fokus verschoben. Die Aktivierung bleibt davon getrennt.
+
+Im Mobile-Modus entspricht dieses Verhalten insbesondere der Entscheidung, dass ein fokussierter Akkordeon-Button nicht automatisch geöffnet werden soll.
+
+Im Desktop-Modus ermöglicht die Trennung von Fokus und Aktivierung, mehrere Tabs mit den Pfeiltasten zu durchlaufen, ohne den Inhaltsbereich bei jeder Fokusbewegung sofort zu wechseln.
 
 ---
 
@@ -339,15 +351,23 @@ Dadurch entspricht die Interaktion stärker den etablierten Accessibility-Muster
 
 ### Entscheidung
 
-Im Desktop-Modus erhält ausschließlich der aktive Tab `tabindex="0"`. Alle anderen Tabs erhalten `tabindex="-1"`.
+Im Desktop-Modus verwendet die Tab-Navigation ein Roving-`tabindex`-Muster.
 
-Dadurch befindet sich nur der aktive Tab in der normalen Tab-Reihenfolge. Zwischen den Tabs wird mit `ArrowLeft` und `ArrowRight` navigiert.
+Der Tab, der aktuell über die Tastatur fokussiert wird, erhält `tabindex="0"`. Die übrigen Tabs erhalten `tabindex="-1"`.
+
+Beim Wechsel des Fokus mit `ArrowLeft` oder `ArrowRight` wird der `tabindex` entsprechend angepasst.
+
+Der aktive Tab und der fokussierte Tab können dabei vorübergehend voneinander abweichen, da die Pfeiltastennavigation den Fokus zunächst unabhängig vom aktiven Zustand bewegt.
+
+Erst durch eine Aktivierung, beispielsweise über `Enter`, `Space` oder einen Mausklick, wird der fokussierte Tab zum aktiven Tab und `activeIndex` entsprechend aktualisiert.
 
 ### Begründung
 
-Die Tab-Navigation verwendet damit ein Roving-`tabindex`-Muster. Die Tastaturbedienung trennt zwischen dem Einstieg in die Tab-Navigation über `Tab` und der Navigation innerhalb der Tabs über die Pfeiltasten.
+Das Roving-`tabindex`-Muster sorgt dafür, dass sich jeweils nur ein Tab in der normalen Tab-Reihenfolge befindet.
 
-Dadurch müssen nicht alle Tabs einzeln durch die normale Tab-Reihenfolge durchlaufen werden.
+Die Trennung zwischen Fokus und Aktivierung ermöglicht gleichzeitig eine bewusste manuelle Aktivierung: Nutzer können mit den Pfeiltasten durch die Tabs navigieren, ohne bei jedem Fokuswechsel unmittelbar den angezeigten Inhaltsbereich zu verändern.
+
+Nach einer Aktivierung werden aktiver Tab und fokussierter Tab wieder miteinander synchronisiert.
 
 Auf mobilen Bildschirmgrößen wird `tabindex` dagegen nicht gesetzt, sodass die Akkordeon-Buttons ihre normale Browser-Tab-Reihenfolge behalten.
 
@@ -467,3 +487,21 @@ Eine mögliche Alternative wäre eine flache DOM-Struktur gewesen, bei der alle 
 Diese Variante würde die Zuordnung zwischen Button und Panel im mobilen Akkordeon weniger eindeutig abbilden und zusätzliche CSS-Logik für die Anordnung erfordern.
 
 `.service-item` bildet die logische Beziehung der Elemente daher direkt in der DOM-Struktur ab.
+
+---
+
+## 20. Fokus-Wiederherstellung beim Breakpoint-Wechsel
+
+Beim Wechsel über die Breakpoint-Grenze von `800px` werden die Tab-Buttons abhängig vom aktuellen Modus zwischen der gemeinsamen Tablist und den jeweiligen `.service-item`-Elementen verschoben.
+
+Da ein DOM-Element durch `appendChild()` bzw. `insertBefore()` während dieses Umbaus seine bisherige Fokusposition verlieren kann, wird der Fokus vor dem DOM-Wechsel auf den aktuell fokussierten Button referenziert und anschließend wiederhergestellt.
+
+Die Fokus-Wiederherstellung erfolgt ausschließlich beim Wechsel des Responsive-Modus über den `matchMedia`-Listener. Bei normalen Aktivierungen oder Navigationen ist sie nicht erforderlich, da dort keine entsprechende DOM-Verschiebung stattfindet.
+
+Dabei wird geprüft, ob der aktuell fokussierte Button tatsächlich zu dieser `service-tabs`-Instanz gehört. Dadurch kann bei mehreren Instanzen auf derselben Seite nicht versehentlich eine andere Instanz den Fokus übernehmen.
+
+Die Wiederherstellung erfolgt mit `requestAnimationFrame()`, damit der DOM-Umbau durch `appendChild()` bzw. `insertBefore()` zunächst abgeschlossen ist. Erst im nächsten Render-Zyklus wird der Fokus erneut auf den zuvor fokussierten Button gesetzt.
+
+Damit bleibt der Fokus für die Nutzerin beim Wechsel zwischen Accordion- und Tab-Modus auf demselben Bedienelement erhalten.
+
+Eine alternative Lösung wäre, den Fokus erst nach jedem einzelnen DOM-Umbau manuell wiederherzustellen. Dies würde jedoch unnötige Fokusoperationen während des Umbaus erzeugen. Deshalb wird die Wiederherstellung zentral in `updateMode()` durchgeführt und ausschließlich beim tatsächlichen Moduswechsel aktiviert.

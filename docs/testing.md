@@ -28,7 +28,7 @@ Die Testdokumentation wird fortlaufend aktualisiert.
 * [x] Die Navigation ist nicht zyklisch.
 * [x] Am ersten bzw. letzten Element wird nicht über die Grenzen hinaus navigiert.
 * [x] `Tab` und `Shift + Tab` behalten das normale Browser-Fokusverhalten bei.
-* [x] Ein geöffneter Bereich kann durch erneuten Klick wieder geschlossen werden.
+* [x] Ein geöffneter Bereich kann durch erneute Aktivierung wieder geschlossen werden.
 * [x] Es können alle Bereiche gleichzeitig geschlossen sein.
 
 ### Tab-Navigation auf Desktop-Bildschirmgrößen
@@ -37,12 +37,17 @@ Die Testdokumentation wird fortlaufend aktualisiert.
 * [x] Der erste Bereich ist initial aktiv.
 * [x] Beim Klick auf einen Tab wird der entsprechende Bereich aktiviert.
 * [x] Nur der aktive Bereich wird angezeigt.
-* [x] Der aktive Tab wird über `aria-selected` dargestellt.
-* [x] Nur der aktive Tab hat `tabindex="0"`.
-* [x] Alle inaktiven Tabs haben `tabindex="-1"`.
-* [x] Beim Wechsel des aktiven Tabs wird der `tabindex` entsprechend aktualisiert.
-* [x] `ArrowRight` wechselt zum nächsten Tab.
-* [x] `ArrowLeft` wechselt zum vorherigen Tab.
+* [x] Der aktive Tab wird über `aria-selected="true"` dargestellt.
+* [x] Zu jedem Zeitpunkt befindet sich genau ein Tab mit `tabindex="0"` in der Tab-Navigation.
+* [x] Alle übrigen Tabs haben `tabindex="-1"`.
+* [x] `ArrowRight` bewegt den Fokus zum nächsten Tab.
+* [x] `ArrowLeft` bewegt den Fokus zum vorherigen Tab.
+* [x] Die Pfeiltasten aktivieren den fokussierten Tab nicht automatisch.
+* [x] Nach einer Pfeilnavigation können fokussierter und aktiver Tab vorübergehend voneinander abweichen.
+* [x] `Enter` aktiviert den fokussierten Tab.
+* [x] `Space` aktiviert den fokussierten Tab.
+* [x] Nach der Aktivierung stimmen fokussierter und aktiver Tab wieder überein.
+* [x] Die Aktivierung aktualisiert `activeIndex` und den angezeigten Inhaltsbereich.
 * [x] Die Navigation ist nicht zyklisch.
 * [x] Am ersten bzw. letzten Tab wird nicht über die Grenzen hinaus navigiert.
 * [x] `Tab` und `Shift + Tab` behalten das normale Browser-Fokusverhalten bei.
@@ -60,7 +65,7 @@ Die Testdokumentation wird fortlaufend aktualisiert.
 * [x] Der aktuell aktive Bereich bleibt beim Wechsel der Bildschirmgröße erhalten, sofern ein Bereich aktiv ist.
 * [x] Beim Wechsel aus einem vollständig geschlossenen Mobile-Accordion wird im Desktop-Modus der erste Tab aktiv.
 * [x] Beim Wechsel zwischen Mobile- und Desktop-Modus befinden sich die Navigationsbuttons jeweils im vorgesehenen Container.
-* [ ] Fokusverhalten beim Wechsel über die 800px-Grenze prüfen.
+* [x] Beim Wechsel über die 800px-Grenze bleibt der Fokus auf dem zuvor fokussierten Button erhalten.
 
 ---
 
@@ -76,6 +81,8 @@ Die Testdokumentation wird fortlaufend aktualisiert.
 * [x] `aria-expanded` wird auf Mobile verwendet.
 * [x] `aria-controls` verbindet Navigation und Inhaltsbereich.
 * [x] `aria-labelledby` verbindet Inhaltsbereich und zugehörigen Button.
+* [x] Nicht aktive Desktop-Tabs erhalten `aria-selected="false"`.
+* [x] Nur der aktive Desktop-Tab ist sichtbar mit `aria-selected="true"` gekennzeichnet.
 
 ### Tastaturbedienung
 
@@ -83,8 +90,24 @@ Die Testdokumentation wird fortlaufend aktualisiert.
 * [x] Die Pfeiltasten werden abhängig vom Darstellungsmodus unterstützt.
 * [x] Im Akkordeon bewegen `ArrowUp` und `ArrowDown` nur den Fokus.
 * [x] Im Akkordeon aktivieren `Enter` und `Space` den fokussierten Bereich.
-* [x] In der Tab-Navigation aktivieren `ArrowLeft` und `ArrowRight` den fokussierten Tab.
+* [x] In der Tab-Navigation bewegen `ArrowLeft` und `ArrowRight` nur den Fokus.
+* [x] In der Tab-Navigation aktivieren `Enter` und `Space` den fokussierten Tab.
+* [x] Die Pfeiltastennavigation aktiviert keinen neuen Inhaltsbereich automatisch.
+* [x] Aktiver und fokussierter Tab können während der Desktop-Navigation vorübergehend voneinander abweichen.
+* [x] Nach der Aktivierung werden Fokus und aktiver Zustand wieder synchronisiert.
 * [x] Die Navigation ist nicht zyklisch.
+* [x] `Home` und `End` werden nicht als zusätzliche Navigationsbefehle verwendet.
+
+### Roving `tabindex`
+
+* [x] Im Desktop-Modus besitzt genau ein Tab `tabindex="0"`.
+* [x] Die übrigen Desktop-Tabs besitzen `tabindex="-1"`.
+* [x] Beim Wechsel des Fokus mit `ArrowLeft` oder `ArrowRight` wird `tabindex="0"` auf den fokussierten Tab verschoben.
+* [x] Der bisher fokussierbare Tab erhält dabei `tabindex="-1"`.
+* [x] Die Änderung des `tabindex` verändert den aktiven Inhaltsbereich nicht.
+* [x] Nach einer Aktivierung stimmen fokussierter Tab und aktiver Tab wieder überein.
+* [x] Im Mobile-Modus wird kein expliziter `tabindex` für die Accordion-Buttons gesetzt.
+* [x] Die Accordion-Buttons behalten dadurch ihre normale Browser-Tab-Reihenfolge.
 
 ### DOM-Struktur und Fokusverhalten
 
@@ -93,10 +116,61 @@ Die Testdokumentation wird fortlaufend aktualisiert.
 * [x] Bereits korrekt positionierte Navigationsbuttons werden bei einer erneuten Zustandsaktualisierung nicht unnötig verschoben.
 * [x] Beim Klick auf einen bereits korrekt positionierten Tab bleibt der Fokus auf dem geklickten Button erhalten.
 * [x] Beim Klick auf einen bereits korrekt positionierten Accordion-Button bleibt der Fokus auf dem geklickten Button erhalten.
+* [x] Beim Verschieben eines Buttons zwischen den Modi bleibt die Zuordnung zwischen Button und Panel erhalten.
+* [x] Jeder Button besitzt eine eindeutige ID.
+* [x] Jedes Panel besitzt eine eindeutige ID.
+* [x] `aria-controls` verweist auf das zugehörige Panel.
+* [x] `aria-labelledby` verweist auf den zugehörigen Button.
+
+### Sichtbare Fokuszustände
+
+* [x] Im Mobile-Modus ist der Fokus auf einem nicht aktiven Button durch einen sichtbaren Akzentrahmen erkennbar.
+* [x] Im Mobile-Modus ist der Fokus auf einem aktiven Button durch den dunklen äußeren Rahmen des Service-Items erkennbar.
+* [x] Im Desktop-Modus ist der Fokus auf einem nicht aktiven Tab durch einen sichtbaren Akzentrahmen erkennbar.
+* [x] Im Desktop-Modus ist der Fokus auf dem aktiven Tab durch einen sichtbaren dunklen Rahmen erkennbar.
+* [x] Beim Fokus auf den aktiven Desktop-Tab wird zusätzlich der Panel-Rahmen dunkel dargestellt.
 
 ---
 
-## 5. TypeScript-Prüfung
+## 5. Visuelle Tests
+
+### Desktop-Tab-Navigation
+
+* [x] Die Desktop-Komponente ist horizontal als Tab-Navigation angeordnet.
+* [x] Die Tablist nimmt die verfügbare Breite der Komponente ein.
+* [x] Die Tabs besitzen eine gleichmäßige Breitenverteilung.
+* [x] Zwischen den Tabs besteht ein Abstand von `5px`.
+* [x] Nicht aktive Tabs verwenden `--color-primary` als Hintergrund und `--color-white` als Textfarbe.
+* [x] Nicht aktive Tabs wechseln bei Hover zu `--color-secondary`.
+* [x] Der aktive Tab verwendet `--color-accent` als Hintergrund und `--color-dark` als Textfarbe.
+* [x] Der aktive Tab behält seinen aktiven Zustand bei Hover.
+* [x] Der aktive Tab besitzt einen dunklen Punkt links neben dem Text.
+* [x] Nicht aktive Tabs besitzen an derselben Stelle einen transparenten Punkt.
+* [x] Die Textausrichtung bleibt dadurch zwischen aktiven und nicht aktiven Tabs erhalten.
+* [x] Das Panel befindet sich direkt unterhalb der Tablist.
+* [x] Zwischen Tablist und Panel entsteht kein zusätzlicher Abstand.
+* [x] Das Panel besitzt eine `5px` starke Akzent-Border.
+* [x] Das Panel besitzt abgerundete untere Ecken.
+* [x] Die zentrale Größenanpassung über `clamp()` funktioniert bei unterschiedlichen Desktop-Breiten.
+* [x] Die Schriftgröße der Tabs passt sich innerhalb der definierten `clamp()`-Grenzen an.
+* [x] Die Panelhöhe passt sich innerhalb der definierten `clamp()`-Grenzen an.
+
+### Mobile-Akkordeon
+
+* [x] Nicht aktive Buttons verwenden `--color-primary` als Hintergrund.
+* [x] Nicht aktive Buttons wechseln bei Hover zu `--color-secondary`.
+* [x] Aktive Buttons verwenden `--color-accent` als Hintergrund.
+* [x] Aktive Buttons behalten ihren aktiven Zustand bei Hover.
+* [x] Der Pfeil zeigt im geschlossenen Zustand nach unten.
+* [x] Der Pfeil zeigt im geöffneten Zustand nach oben.
+* [x] Die äußere Border des aktiven Service-Items verwendet `--color-accent`.
+* [x] Die äußere Border bleibt im geschlossenen Zustand transparent.
+* [x] Beim Öffnen entsteht kein sichtbarer Layout Shift durch die Border.
+* [x] Die Button- und Panel-Flächen bilden im geöffneten Zustand einen zusammenhängenden Block.
+
+---
+
+## 6. TypeScript-Prüfung
 
 Die TypeScript-Implementierung wird während der Entwicklung mit folgendem Befehl auf Typfehler geprüft:
 
@@ -114,7 +188,7 @@ npm run build
 
 ---
 
-## 6. Testumgebung
+## 7. Testumgebung
 
 Die Tests werden zunächst manuell in einem aktuellen Desktop-Browser durchgeführt.
 
@@ -124,12 +198,15 @@ Geprüft werden insbesondere:
 * Mausbedienung
 * Tastaturbedienung
 * Wechsel zwischen Mobile- und Desktop-Darstellung
+* Fokusverhalten
+* sichtbare Zustände
+* responsive Größenanpassungen
 
 Weitere Browser und Geräte werden im Rahmen der finalen Prüfung ergänzt.
 
 ---
 
-## 7. Automatisierte Tests
+## 8. Automatisierte Tests
 
 Automatisierte Tests mit Vitest werden nach der Fertigstellung der Kernfunktionalität ergänzt.
 
@@ -137,8 +214,14 @@ Dabei sollen insbesondere relevante Verhaltensweisen der Komponente automatisier
 
 * Initialzustand
 * Wechsel des aktiven Bereichs
+* Öffnen und Schließen des Akkordeons
 * responsive Zustandsänderungen
 * korrekte ARIA-Zustände
-* Tastaturinteraktionen
+* Roving `tabindex`
+* Fokusbewegung mit den Pfeiltasten
+* Trennung von Fokus und Aktivierung
+* Aktivierung über `Enter` und `Space`
+* Verhalten an den Grenzen der Navigation
+* korrekte Zuordnung von Buttons und Panels
 
 Dabei soll nicht ausschließlich die Codeabdeckung betrachtet werden, sondern insbesondere das tatsächlich relevante Verhalten der Komponente.

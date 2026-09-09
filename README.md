@@ -56,10 +56,13 @@ Die von `serve` angezeigte lokale Adresse im Browser öffnen.
 ```text
 ├── docs
 │   ├── decisions.md
+│   ├── design.md
 │   └── testing.md
 ├── src
 │   ├── main.ts
-│   └── service-tabs.ts
+│   ├── service-tabs.ts
+│   └── styles.css
+├── .gitattributes
 ├── .gitignore
 ├── index.html
 ├── package-lock.json
@@ -70,14 +73,30 @@ Die von `serve` angezeigte lokale Adresse im Browser öffnen.
 
 ## Anforderungen
 
+### Umgesetzt
+
 * keine Frameworks
 * keine UI-Libraries
 * responsive
 * Mobile First
-* barrierearme und tastaturbedienbare Umsetzung
-* mindestens drei unterschiedliche Inhaltstypen
+* native Web Component
+* TypeScript
+* Tastaturbedienung
+* semantische HTML-Elemente
+* ARIA-Zustände für Tabs und Akkordeon
+* Desktop-Tab-Navigation ab 800px
+* Mobile-Akkordeon unter 800px
+* Roving Tabindex für die Desktop-Tab-Navigation
+* Fokus- und Aktivierungszustände getrennt behandelt
 * wiederverwendbare Komponentenstruktur
-* automatisierte Tests
+
+### Noch offen
+
+* unterschiedliche konkrete Inhaltstypen vollständig ergänzen
+* Inhalte responsive gestalten
+* automatisierte Tests mit Vitest
+* abschließende Accessibility-Prüfung
+* abschließende Tests und Optimierungen
 
 ## Entwicklung
 
@@ -96,10 +115,14 @@ Das Projekt wird schrittweise entwickelt:
 
 Die technischen Entscheidungen und ihre Begründungen sind in [`decisions.md`](./docs/decisions.md) dokumentiert.
 
+Die visuellen und gestalterischen Entscheidungen sind in [`design.md`](./docs/design.md) dokumentiert.
+
 Der aktuelle Teststand und die geplanten Prüfungen befinden sich in [`testing.md`](./docs/testing.md).
 
 Die Entwicklungsschritte sind zusätzlich über die Git-Historie nachvollziehbar.
 
 ## Status
 
-🚧 In Entwicklung
+🚧 **In Entwicklung**
+
+Die responsive Navigation einschließlich Akkordeon- und Tab-Modus sowie die grundlegende visuelle Gestaltung sind umgesetzt. Die konkreten Inhaltstypen, automatisierten Tests und abschließenden Prüfungen folgen als weitere Entwicklungsschritte.

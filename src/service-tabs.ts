@@ -13,7 +13,7 @@ class ServiceTabs extends HTMLElement {
   }[] = [];
 
   private handleMediaQueryChange = (): void => {
-    this.updateMode();
+    this.updateMode(true);
   };
 
   private applyMode(isDesktop: boolean): void {
@@ -36,7 +36,14 @@ class ServiceTabs extends HTMLElement {
     }
   }
 
-  private updateMode(): void {
+  private updateMode(restoreFocus = false): void {
+    const focusedButton =
+      restoreFocus &&
+      document.activeElement instanceof HTMLButtonElement &&
+      this.entries.some(({ button }) => button === document.activeElement)
+        ? document.activeElement
+        : null;
+
     const isDesktop = this.mediaQuery.matches;
 
     if (isDesktop && this.activeIndex === -1) {
@@ -84,6 +91,12 @@ class ServiceTabs extends HTMLElement {
 
       panel.toggleAttribute("hidden", !isActive);
     });
+
+    if (focusedButton) {
+      requestAnimationFrame(() => {
+        focusedButton.focus();
+      });
+    }
   }
 
   disconnectedCallback(): void {
@@ -159,11 +172,11 @@ class ServiceTabs extends HTMLElement {
         }
 
         if (this.mediaQuery.matches && event.key === "ArrowRight") {
-          this.moveBy(index, 1, event);
+          this.moveBy(index, 1, event, { activate: false });
         }
 
         if (this.mediaQuery.matches && event.key === "ArrowLeft") {
-          this.moveBy(index, -1, event);
+          this.moveBy(index, -1, event, { activate: false });
         }
       });
 
@@ -172,22 +185,30 @@ class ServiceTabs extends HTMLElement {
     this.updateMode();
   }
 
-  private moveTo(index: number, event: KeyboardEvent, activate = true): void {
-    const entry = this.entries[index];
+  private moveTo(
+  index: number,
+  event: KeyboardEvent,
+  activate = true,
+): void {
+  event.preventDefault();
 
-    if (!entry) {
-      return;
-    }
+  const entry = this.entries[index];
 
-    event.preventDefault();
-
-    if (activate) {
-      this.activeIndex = index;
-      this.updateMode();
-    }
-
-    entry.button.focus();
+  if (!entry) {
+    return;
   }
+
+  if (activate) {
+    this.activeIndex = index;
+    this.updateMode();
+  } else if (this.mediaQuery.matches) {
+    this.entries.forEach(({ button }, buttonIndex) => {
+      button.setAttribute("tabindex", buttonIndex === index ? "0" : "-1");
+    });
+  }
+
+  entry.button.focus();
+}
   private moveBy(
     currentIndex: number,
     offset: number,
