@@ -391,3 +391,54 @@ Die Desktop-Gestaltung wird ausschließlich innerhalb von:
 ```
 
 definiert.
+
+---
+
+## 12. Gestaltung der Inhaltstypen
+
+Neben der Navigation wurden auch die drei Inhaltstypen gestaltet. Die Gestaltung folgt dabei denselben Prinzipien wie die Navigation: zentrale Farbpalette, Mobile First und `min-width`-Media-Queries für größere Bildschirme.
+
+Jeder Inhaltstyp bringt sein eigenes Stylesheet mit, das gemeinsam mit der jeweiligen Komponente geladen wird. Dadurch bleibt die Gestaltung der Inhalte von der Gestaltung der Navigation getrennt.
+
+### Mobile First
+
+Die Basis-Styles beschreiben jeweils die mobile Darstellung. Größere Bildschirme werden anschließend über zusätzliche Media Queries ergänzt:
+
+* `@media (min-width: 800px)` – Desktop
+* `@media (min-width: 1100px)` – großer Desktop
+
+Auf kleinen Bildschirmen werden die Inhalte durchgehend einspaltig dargestellt. Interaktive Elemente erhalten ausreichend große Touch-Ziele.
+
+### Steuercheck (`tax-form`)
+
+Das Formular wird als mehrstufiger Prozess dargestellt. Sichtbar ist immer genau ein Schritt.
+
+* Der Fortschritt wird über die Komponente `form-stepper` dargestellt. Auf Mobile erscheint er als Textangabe („Schritt 2 von 5"), ab 800px als visuelle Schrittanzeige.
+* Eingabefelder verwenden dauerhaft sichtbare Labels oberhalb des Feldrahmens.
+* Auf Mobile stehen alle Felder untereinander, ab 800px werden zusammengehörige Felder nebeneinander angeordnet.
+* Die Navigationsbuttons stehen auf Mobile untereinander über die volle Breite, ab 800px nebeneinander.
+* Für die Zusammenfassung existieren eigene Print-Styles, damit der Ausdruck wie ein Dokument und nicht wie die Anwendung wirkt.
+
+### Ansprechpartner (`contact-person`)
+
+Die Kontaktinformationen werden über ein Grid-Layout dargestellt, das sich in drei Stufen anpasst:
+
+* unter 800px: einspaltig, Portrait zentriert
+* 800px–1099px: Portrait und Intro nebeneinander, Kontaktdaten zweispaltig darunter
+* ab 1100px: Portrait und Intro oben, Standort und Kontaktdaten darunter nebeneinander
+
+Kontaktdaten werden jeweils durch ein Icon und eine farbige Markierung am linken Rand hervorgehoben.
+
+### Unterlagen (`document-upload`)
+
+Der Upload-Bereich besteht aus einer großflächigen Dropzone, den ausgewählten Dateien und den bereits hinzugefügten Dateien.
+
+* Die Dropzone wird während eines Drag-Vorgangs farblich hervorgehoben.
+* Ausgewählte Dateien werden farblich von bereits hinzugefügten Dateien unterschieden.
+* Auf Mobile steht der Entfernen-Button eines Eintrags in einer eigenen Zeile, ab 800px rechts neben den Dateiangaben.
+* Die Vorschaugröße wächst mit der Bildschirmgröße mit.
+* Die Dateivorschau wird als Dialog dargestellt, dessen Breite und Höhe an den Viewport gebunden sind.
+
+### Bereiche ohne Inhalt
+
+Bereiche, die aktuell keine Einträge enthalten, werden über das `hidden`-Attribut vollständig ausgeblendet. Da die betroffenen Bereiche im Stylesheet ein eigenes `display` setzen, wird `hidden` dort zusätzlich explizit berücksichtigt.

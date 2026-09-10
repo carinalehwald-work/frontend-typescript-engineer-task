@@ -1,12 +1,12 @@
 # Digital Service
 
-Eine responsive Web-Komponente auf Basis nativer Web-Technologien mit Fokus auf Accessibility, Wiederverwendbarkeit und einer sauberen TypeScript-Architektur.
+Eine responsive Web-Komponente auf Basis nativer Web-Technologien mit Fokus auf **Accessibility, Wiederverwendbarkeit und einer sauberen TypeScript-Architektur**.
 
 ## Ziel
 
 Dieses Projekt entstand im Rahmen einer Frontend-Entwicklungsaufgabe.
 
-Die zentrale Komponente stellt mindestens drei unterschiedliche Inhaltstypen bereit und passt ihre Navigation an die jeweilige Bildschirmgröße an:
+Die zentrale Komponente stellt drei unterschiedliche Inhaltstypen bereit und passt ihre Navigation an die jeweilige Bildschirmgröße an:
 
 * **Desktop (≥ 800px):** Tab-Navigation
 * **Mobile (< 800px):** Akkordeon
@@ -27,7 +27,61 @@ Die Entwicklung erfolgt nach dem **Mobile-First-Prinzip** mit Fokus auf:
 * Web Components
 * Native Web APIs
 
-Automatisierte Tests mit **Vitest** sind als weiterer Entwicklungsschritt vorgesehen.
+Es werden keine Frameworks oder UI-Libraries verwendet.
+
+## Anforderungen
+
+### Umgesetzt
+
+* keine Frameworks
+* keine UI-Libraries
+* responsive Mobile-First-Umsetzung
+* native Web Component
+* TypeScript
+* Tastaturbedienung
+* semantische HTML-Elemente
+* ARIA-Zustände für Tabs und Akkordeon
+* Desktop-Tab-Navigation ab 800px
+* Mobile-Akkordeon unter 800px
+* Roving Tabindex für die Desktop-Tab-Navigation
+* getrennte Behandlung von Fokus- und Aktivierungszuständen
+* drei unterschiedliche Inhaltstypen
+* responsive Gestaltung der Inhalte
+* wiederverwendbare Komponentenstruktur
+* Datei-Upload mit Drag & Drop
+* Datei-Validierung
+* Dateivorschau für unterstützte Dateitypen
+
+### Nicht umgesetzt
+
+* automatisierte Tests mit Vitest
+* abschließende automatisierte Accessibility-Tests
+
+Die automatisierten Tests waren als weiterer Entwicklungsschritt vorgesehen, konnten innerhalb des zeitlichen Rahmens der Aufgabe jedoch nicht mehr umgesetzt werden.
+
+## Screenshots
+
+Die folgenden Screenshots zeigen die responsive Darstellung der Web-Komponente und ausgewählte Inhaltstypen.
+
+### Desktop – Steuercheck
+
+![Desktop – Steuercheck](./docs/screenshots/desktop-steuercheck-phase-4.png)
+
+### Desktop – Ansprechpartner
+
+![Desktop – Ansprechpartner](./docs/screenshots/desktop-kontaktperson.png)
+
+### Desktop – Unterlagen
+
+![Desktop – Unterlagen](./docs/screenshots/desktop-unterlagen.png)
+
+### Mobile – Ansprechpartner
+
+![Mobile – Ansprechpartner](./docs/screenshots/mobile-accordion-kontaktperson.png)
+
+### Mobile – Steuercheck
+
+![Mobile – Steuercheck](./docs/screenshots/mobile-accordion-steuercheck-phase-2.png)
 
 ## Start
 
@@ -57,8 +111,19 @@ Die von `serve` angezeigte lokale Adresse im Browser öffnen.
 ├── docs
 │   ├── decisions.md
 │   ├── design.md
-│   └── testing.md
+│   ├── testing.md
+│   └── screenshots
+│       ├── desktop-kontaktperson.png
+│       ├── desktop-steuercheck-phase-4.png
+│       ├── desktop-unterlagen.png
+│       ├── mobile-accordion-kontaktperson.png
+│       └── mobile-accordion-steuercheck-phase-2.png
 ├── src
+│   ├── components
+│   │   ├── contact-person
+│   │   ├── document-upload
+│   │   ├── form-stepper
+│   │   └── tax-form
 │   ├── main.ts
 │   ├── service-tabs.ts
 │   └── styles.css
@@ -71,58 +136,24 @@ Die von `serve` angezeigte lokale Adresse im Browser öffnen.
 └── tsconfig.json
 ```
 
-## Anforderungen
-
-### Umgesetzt
-
-* keine Frameworks
-* keine UI-Libraries
-* responsive
-* Mobile First
-* native Web Component
-* TypeScript
-* Tastaturbedienung
-* semantische HTML-Elemente
-* ARIA-Zustände für Tabs und Akkordeon
-* Desktop-Tab-Navigation ab 800px
-* Mobile-Akkordeon unter 800px
-* Roving Tabindex für die Desktop-Tab-Navigation
-* Fokus- und Aktivierungszustände getrennt behandelt
-* wiederverwendbare Komponentenstruktur
-
-### Noch offen
-
-* unterschiedliche konkrete Inhaltstypen vollständig ergänzen
-* Inhalte responsive gestalten
-* automatisierte Tests mit Vitest
-* abschließende Accessibility-Prüfung
-* abschließende Tests und Optimierungen
-
-## Entwicklung
-
-Das Projekt wird schrittweise entwickelt:
-
-1. TypeScript und native Web Components einrichten
-2. Responsive Navigation als Akkordeon und Tab-Navigation umsetzen
-3. Navigation visuell gestalten
-4. Unterschiedliche Inhaltstypen ergänzen
-5. Inhalte responsive gestalten
-6. Accessibility systematisch prüfen und verbessern
-7. Automatisierte Tests ergänzen
-8. Abschließende Tests und Optimierungen durchführen
-
 ## Dokumentation
 
-Die technischen Entscheidungen und ihre Begründungen sind in [`decisions.md`](./docs/decisions.md) dokumentiert.
-
-Die visuellen und gestalterischen Entscheidungen sind in [`design.md`](./docs/design.md) dokumentiert.
-
-Der aktuelle Teststand und die geplanten Prüfungen befinden sich in [`testing.md`](./docs/testing.md).
+* [`decisions.md`](./docs/decisions.md) – technische Entscheidungen und ihre Begründungen
+* [`design.md`](./docs/design.md) – visuelle und gestalterische Entscheidungen
+* [`testing.md`](./docs/testing.md) – durchgeführte Prüfungen und aktueller Teststand
 
 Die Entwicklungsschritte sind zusätzlich über die Git-Historie nachvollziehbar.
 
+## Entwicklungsprozess
+
+Das Projekt wurde schrittweise entwickelt. Dabei wurden zunächst die technische Grundlage und die responsive Navigation aufgebaut und anschließend die unterschiedlichen Inhaltstypen sowie deren responsive Darstellung ergänzt.
+
+Der ursprüngliche Entwicklungsplan sah zusätzlich automatisierte Tests mit Vitest und eine abschließende Accessibility-Testphase vor. Aufgrund des zeitlichen Rahmens wurden diese Punkte als nächste mögliche Entwicklungsschritte dokumentiert, jedoch nicht mehr umgesetzt.
+
 ## Status
 
-🚧 **In Entwicklung**
+✅ **Fertiggestellt**
 
-Die responsive Navigation einschließlich Akkordeon- und Tab-Modus sowie die grundlegende visuelle Gestaltung sind umgesetzt. Die konkreten Inhaltstypen, automatisierten Tests und abschließenden Prüfungen folgen als weitere Entwicklungsschritte.
+Die responsive Navigation mit Tab- und Akkordeon-Modus, drei unterschiedliche Inhaltstypen sowie die wesentlichen Accessibility-, Responsive- und Upload-Funktionen sind umgesetzt.
+
+Der TypeScript-Build ist erfolgreich. Automatisierte Tests mit Vitest und eine weiterführende automatisierte Accessibility-Prüfung sind nicht Bestandteil der finalen Version.

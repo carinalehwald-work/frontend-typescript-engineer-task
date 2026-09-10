@@ -2,11 +2,13 @@
 
 ## 1. Ziel
 
-Die Komponente wird schrittweise getestet, um sicherzustellen, dass Funktionalität, responsives Verhalten und Accessibility zuverlässig funktionieren.
+Die Komponente wurde schrittweise getestet, um sicherzustellen, dass Funktionalität, responsives Verhalten und Accessibility zuverlässig funktionieren.
 
-Während der Entwicklung werden zunächst manuelle Tests im Browser durchgeführt. Automatisierte Tests mit Vitest werden anschließend ergänzt.
+Die Prüfung erfolgte **manuell im Browser**, ergänzt um die TypeScript-Prüfung über `tsc`.
 
-Die Testdokumentation wird fortlaufend aktualisiert.
+Automatisierte Tests mit Vitest waren als weiterer Entwicklungsschritt vorgesehen, konnten innerhalb des zeitlichen Rahmens der Aufgabe jedoch **nicht mehr umgesetzt werden** (siehe Abschnitt 9).
+
+Dieses Dokument beschreibt den tatsächlichen finalen Teststand. Alle mit `[x]` markierten Punkte wurden manuell geprüft.
 
 ---
 
@@ -170,29 +172,101 @@ Die Testdokumentation wird fortlaufend aktualisiert.
 
 ---
 
-## 6. TypeScript-Prüfung
+## 6. Inhaltstypen
 
-Die TypeScript-Implementierung wird während der Entwicklung mit folgendem Befehl auf Typfehler geprüft:
+Die drei Inhaltstypen wurden manuell im Browser geprüft.
+
+### Steuercheck / steuerliches Formular (`tax-form`)
+
+* [x] Das Formular wird innerhalb des Steuer-Check-Bereichs geladen.
+* [x] Es ist immer genau ein Schritt sichtbar.
+* [x] Der Stepper zeigt den aktuellen Schritt an.
+* [x] `Weiter` wechselt zum nächsten Schritt.
+* [x] `Zurück` wechselt zum vorherigen Schritt.
+* [x] Im ersten Schritt wird kein `Zurück`-Button angezeigt.
+* [x] Die Beschriftung des Weiter-Buttons wechselt je nach Schritt.
+* [x] Pflichtfelder verhindern den Wechsel zum nächsten Schritt.
+* [x] Der Browser zeigt bei ungültigen Feldern eine Validierungsmeldung an.
+* [x] Der Slider für den Arbeitsweg aktualisiert die Kilometerangabe.
+* [x] Kostenpositionen können erfasst werden.
+* [x] Erfasste Kostenpositionen können wieder entfernt werden.
+* [x] Die Summen werden nach dem Hinzufügen und Entfernen aktualisiert.
+* [x] Die Zusammenfassung im letzten Schritt übernimmt die zuvor erfassten Angaben.
+* [x] Der Fokus wird beim Schrittwechsel auf die Überschrift des neuen Schritts gesetzt.
+
+### Ansprechpartner (`contact-person`)
+
+* [x] Die Inhalte werden geladen und dargestellt.
+* [x] Telefonnummer und E-Mail-Adresse sind als Links nutzbar.
+* [x] Die Kontaktdaten sind mit der Tastatur erreichbar.
+* [x] Die Karte wird eingebunden dargestellt.
+* [x] Die Darstellung passt sich Mobile, kleinem und großem Desktop an.
+
+### Unterlagen (`document-upload`)
+
+* [x] Der Upload-Bereich wird geladen und dargestellt.
+* [x] Dateien können über das Dateifeld ausgewählt werden.
+* [x] Dateien können per Drag & Drop abgelegt werden.
+* [x] Die Dropzone wird während des Ziehens visuell hervorgehoben.
+* [x] Eine neben der Dropzone losgelassene Datei ersetzt nicht die Seite.
+* [x] Die Bereiche für ausgewählte und hochgeladene Dateien sind nur sichtbar, wenn sie Einträge enthalten.
+
+#### Validierung
+
+* [x] Nur PDF, JPG und PNG werden akzeptiert.
+* [x] Nicht unterstützte Dateitypen werden mit einer Meldung abgelehnt.
+* [x] Dateien über 10 MB werden mit einer Meldung abgelehnt.
+* [x] Bereits ausgewählte Dateien werden nicht doppelt übernommen.
+* [x] Bereits hinzugefügte Dateien werden nicht doppelt übernommen.
+* [x] Eine bestehende Auswahl bleibt erhalten, wenn ein Auswahlvorgang nur ungültige Dateien enthält.
+* [x] Dieselbe Datei kann nach dem Entfernen erneut ausgewählt werden.
+
+#### Entfernen von Dateien
+
+* [x] Einzelne Dateien können aus der Auswahl entfernt werden.
+* [x] Einzelne Dateien können aus der Liste der hochgeladenen Dateien entfernt werden.
+* [x] Nach dem Entfernen wird der Fokus auf einen sinnvollen Eintrag gesetzt.
+* [x] Ist die Liste anschließend leer, übernimmt das Dateifeld den Fokus.
+* [x] Die Anzahlangabe wird nach dem Entfernen aktualisiert.
+
+#### Datei-Vorschau
+
+* [x] Bilder werden in einer vergrößerten Vorschau geöffnet.
+* [x] PDF-Dateien werden in der Vorschau geöffnet.
+* [x] Für PDF-Dateien steht zusätzlich ein Link zum Öffnen in einem neuen Tab bereit.
+* [x] Die Vorschau kann über den Schließen-Button geschlossen werden.
+* [x] Die Vorschau kann über `Escape` geschlossen werden.
+* [x] Ein Klick auf den Hintergrund schließt die Vorschau.
+* [x] Der Fokus bleibt bei geöffneter Vorschau innerhalb des Dialogs.
+
+---
+
+## 7. TypeScript-Prüfung
+
+Die TypeScript-Implementierung wurde mit folgendem Befehl auf Typfehler geprüft:
 
 ```bash
 npx tsc --noEmit
 ```
 
-Die Prüfung soll vor relevanten Commits bzw. spätestens vor der finalen Abgabe erfolgreich durchlaufen.
-
-Zusätzlich wird der Produktions-Build mit folgendem Befehl geprüft:
+Zusätzlich wurde der Build geprüft:
 
 ```bash
 npm run build
 ```
 
+* [x] `npm run typecheck` läuft ohne Fehler durch.
+* [x] `npm run build` läuft ohne Fehler durch.
+
+Die Konfiguration verwendet `strict` und `noUncheckedIndexedAccess`. Über `noEmitOnError` wird bei Typfehlern kein Build erzeugt.
+
 ---
 
-## 7. Testumgebung
+## 8. Testumgebung
 
-Die Tests werden zunächst manuell in einem aktuellen Desktop-Browser durchgeführt.
+Die Tests wurden manuell in einem aktuellen Desktop-Browser durchgeführt. Die mobile Darstellung wurde über die responsive Ansicht der Browser-Entwicklerwerkzeuge geprüft.
 
-Geprüft werden insbesondere:
+Geprüft wurden insbesondere:
 
 * unterschiedliche Fensterbreiten
 * Mausbedienung
@@ -202,15 +276,39 @@ Geprüft werden insbesondere:
 * sichtbare Zustände
 * responsive Größenanpassungen
 
-Weitere Browser und Geräte werden im Rahmen der finalen Prüfung ergänzt.
+Ein Test auf realen mobilen Endgeräten sowie eine breitere Browser-Matrix waren nicht Bestandteil der Prüfung.
 
 ---
 
-## 8. Automatisierte Tests
+## 9. Finaler Teststand
 
-Automatisierte Tests mit Vitest werden nach der Fertigstellung der Kernfunktionalität ergänzt.
+### Manuell geprüft
 
-Dabei sollen insbesondere relevante Verhaltensweisen der Komponente automatisiert geprüft werden, beispielsweise:
+* Desktop Tab-Navigation
+* Mobile Akkordeon
+* Tastaturbedienung
+* Fokusverhalten
+* ARIA-Zustände
+* responsives Verhalten
+* Steuercheck / Formular
+* Ansprechpartner
+* Unterlagen
+* Datei-Upload
+* Dateityp- und Größenvalidierung
+* Entfernen von Dateien
+* Datei-Vorschau
+* TypeScript Build / Typecheck
+
+### Nicht umgesetzt
+
+* automatisierte Tests mit Vitest
+* automatisierte Accessibility-Tests
+* Tests auf realen mobilen Endgeräten
+* Prüfung über eine breitere Browser-Matrix
+
+Automatisierte Tests mit Vitest waren als weiterer Entwicklungsschritt vorgesehen, konnten innerhalb des zeitlichen Rahmens der Aufgabe jedoch nicht mehr umgesetzt werden. Es liegen daher **keine automatisierten Testergebnisse** vor.
+
+Als nächster Schritt wären insbesondere folgende Verhaltensweisen für eine automatisierte Prüfung relevant:
 
 * Initialzustand
 * Wechsel des aktiven Bereichs
@@ -223,5 +321,6 @@ Dabei sollen insbesondere relevante Verhaltensweisen der Komponente automatisier
 * Aktivierung über `Enter` und `Space`
 * Verhalten an den Grenzen der Navigation
 * korrekte Zuordnung von Buttons und Panels
+* Validierung und Zustandsverwaltung im Datei-Upload
 
-Dabei soll nicht ausschließlich die Codeabdeckung betrachtet werden, sondern insbesondere das tatsächlich relevante Verhalten der Komponente.
+Dabei wäre nicht ausschließlich die Codeabdeckung zu betrachten, sondern insbesondere das tatsächlich relevante Verhalten der Komponente.

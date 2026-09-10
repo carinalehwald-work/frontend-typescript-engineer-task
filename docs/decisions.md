@@ -125,11 +125,11 @@ Die zentrale `service-tabs`-Komponente übernimmt die Navigation und das respons
 
 Die eigentlichen Inhalte werden in eigenständigen Komponenten gekapselt.
 
-Geplant sind beispielsweise:
+Umgesetzt sind:
 
-* `service-information`
-* `service-request`
-* `service-documents`
+* `contact-person` – Ansprechpartner
+* `tax-form` – Steuercheck / steuerliches Formular
+* `document-upload` – Unterlagen
 
 ### Begründung
 
@@ -171,9 +171,9 @@ Beispielsweise kann später ein weiterer Inhaltstyp ergänzt werden, ohne dass `
 
 Eine mögliche Umsetzung wäre gewesen, die konkreten Inhaltstypen direkt in `service-tabs` fest zu programmieren:
 
-* `service-information`
-* `service-request`
-* `service-documents`
+* `contact-person`
+* `tax-form`
+* `document-upload`
 
 Diese Variante wäre für genau diese drei Inhalte zunächst einfacher, würde die Komponente aber stärker an konkrete Inhaltstypen koppeln.
 
@@ -185,10 +185,24 @@ Die dynamische Variante bietet daher eine bessere Grundlage für Wiederverwendba
 
 Der Titel eines Inhaltsbereichs wird über das Attribut `data-title` definiert.
 
+Das Attribut wird dabei an der Section gesetzt, die den jeweiligen Inhaltstyp enthält.
+
 Beispiel:
 
 ```html
-<service-information data-title="Informationen"></service-information>
+<service-tabs>
+  <section data-title="Kontakt">
+    <contact-person></contact-person>
+  </section>
+
+  <section data-title="Steuer-Check">
+    <tax-form></tax-form>
+  </section>
+
+  <section data-title="Unterlagen">
+    <document-upload></document-upload>
+  </section>
+</service-tabs>
 ```
 
 ### Begründung
