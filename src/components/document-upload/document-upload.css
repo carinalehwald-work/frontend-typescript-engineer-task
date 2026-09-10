@@ -131,6 +131,15 @@ document-upload {
   margin-top: 1.5rem;
 }
 
+/* WICHTIG:
+   hidden muss auch dann wirklich display:none sein,
+   wenn die normalen Regeln oben display:grid setzen. */
+
+.document-upload__pending[hidden],
+.document-upload__documents[hidden] {
+  display: none;
+}
+
 .document-upload__list-header {
   display: flex;
   align-items: flex-end;
