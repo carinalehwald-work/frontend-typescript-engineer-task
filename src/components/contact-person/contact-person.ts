@@ -19,8 +19,7 @@ export class ContactPerson extends HTMLElement {
 
     stylesheet.id = stylesheetId;
     stylesheet.rel = "stylesheet";
-    stylesheet.href =
-      "./src/components/contact-person/contact-person.css";
+    stylesheet.href = "./src/components/contact-person/contact-person.css";
 
     document.head.append(stylesheet);
   }
@@ -55,29 +54,8 @@ export class ContactPerson extends HTMLElement {
       return;
     }
 
-    if (!navigator.onLine) {
-      iframe.hidden = true;
-      fallback.hidden = false;
-      return;
-    }
-
-    let loaded = false;
-
-    iframe.addEventListener("load", () => {
-      loaded = true;
-    });
-
-    window.setTimeout(() => {
-      if (!loaded) {
-        iframe.hidden = true;
-        fallback.hidden = false;
-      }
-    }, 5000);
-
-    window.addEventListener("offline", () => {
-      iframe.hidden = true;
-      fallback.hidden = false;
-    });
+    iframe.hidden = false;
+    fallback.hidden = true;
   }
 
   private renderError(): void {
