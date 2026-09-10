@@ -1,0 +1,97 @@
+<article class="contact-person">
+  <div class="contact-person__image">
+    <img
+      src="./src/components/contact-person/fake-contact-person.png"
+      alt="Anna Müller, Steuerberaterin"
+      width="800"
+      height="800"
+    />
+  </div>
+
+  <div class="contact-person__intro">
+    <p class="contact-person__eyebrow">Ihre Ansprechpartnerin</p>
+
+    <h2>Anna Müller</h2>
+
+    <p class="contact-person__role">Steuerberaterin</p>
+
+    <p class="contact-person__description">
+      Ich unterstütze Sie bei Fragen rund um Ihre Steuererklärung und die
+      digitale Zusammenarbeit mit unserer Kanzlei.
+    </p>
+  </div>
+
+  <div class="contact-person__details">
+    <div class="contact-person__detail">
+      <span
+        class="contact-person__icon contact-person__icon--phone"
+        aria-hidden="true"
+      >☎</span>
+
+      <div>
+        <h3 class="contact-person__label">Telefon</h3>
+        <a href="tel:+494511234567">0451 1234567</a>
+      </div>
+    </div>
+
+    <div class="contact-person__detail">
+      <span
+        class="contact-person__icon contact-person__icon--email"
+        aria-hidden="true"
+      >✉</span>
+
+      <div>
+        <h3 class="contact-person__label">E-Mail</h3>
+        <a href="mailto:anna.mueller@example.de">
+          anna.mueller@example.de
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-person__detail">
+      <span
+        class="contact-person__icon contact-person__icon--address"
+        aria-hidden="true"
+      >⬟</span>
+
+      <div>
+        <h3 class="contact-person__label">Adresse</h3>
+        <address>
+          Musterstraße 12<br />
+          23552 Lübeck
+        </address>
+      </div>
+    </div>
+
+    <div class="contact-person__detail">
+      <span
+        class="contact-person__icon contact-person__icon--hours"
+        aria-hidden="true"
+      >◷</span>
+
+      <div>
+        <h3 class="contact-person__label">Sprechzeiten</h3>
+        <p>
+          Montag–Donnerstag<br />
+          09:00–16:00 Uhr
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-person__map">
+    <h3 class="contact-person__label">Standort</h3>
+
+    <iframe
+      title="Standort der Kanzlei auf einer Karte"
+      src="https://www.openstreetmap.org/export/embed.html?bbox=10.67%2C53.85%2C10.72%2C53.88&layer=mapnik"
+      loading="lazy"
+      referrerpolicy="no-referrer"
+    ></iframe>
+
+    <div class="contact-person__map-fallback" hidden>
+      <p>Die Karte konnte nicht geladen werden.</p>
+      <p>Bitte prüfen Sie Ihre Internetverbindung.</p>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,347 @@
+contact-person {
+  display: block;
+  width: 100%;
+}
+
+.contact-person {
+  display: grid;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  gap: 2rem;
+}
+
+/* =========================================================
+   IMAGE
+   ========================================================= */
+
+.contact-person__image {
+  min-width: 0;
+}
+
+.contact-person__image img {
+  display: block;
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.contact-person__intro {
+  min-width: 0;
+}
+
+.contact-person__eyebrow,
+.contact-person__label {
+  margin: 0 0 0.4rem;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.contact-person__intro h2 {
+  margin: 0;
+  color: var(--color-dark);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  line-height: 1.1;
+}
+
+.contact-person__role {
+  margin: 0.5rem 0 1rem;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.contact-person__description {
+  max-width: 55ch;
+  margin: 0;
+  color: var(--color-dark);
+  line-height: 1.6;
+}
+
+/* =========================================================
+   DETAILS
+   ========================================================= */
+
+.contact-person__details {
+  display: grid;
+  min-width: 0;
+  gap: 1.5rem;
+}
+
+.contact-person__detail {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.9rem;
+  padding-left: 1rem;
+}
+
+.contact-person__detail::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  border-radius: 4px;
+  background: var(--color-primary);
+  content: "";
+}
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.contact-person__icon {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  flex: 0 0 2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  box-sizing: border-box;
+  place-items: center;
+  border: 2px solid var(--color-accent);
+  border-radius: 50%;
+  background: var(--color-secondary);
+  color: var(--color-accent);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.contact-person__detail > div {
+  min-width: 0;
+}
+
+.contact-person__detail .contact-person__label {
+  margin-bottom: 0.35rem;
+}
+
+.contact-person__detail a {
+  color: var(--color-primary);
+  overflow-wrap: anywhere;
+}
+
+.contact-person__detail p,
+.contact-person__detail address {
+  margin: 0;
+  color: var(--color-dark);
+  font-style: normal;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   MAP
+   ========================================================= */
+
+.contact-person__map {
+  min-width: 0;
+}
+
+.contact-person__map .contact-person__label {
+  margin-bottom: 0.75rem;
+}
+
+.contact-person__map iframe {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 300px;
+  box-sizing: border-box;
+  border: 2px solid var(--color-accent);
+  border-radius: 4px;
+}
+
+.contact-person__map-fallback {
+  width: 100%;
+  min-height: 300px;
+  box-sizing: border-box;
+  padding: 2rem;
+  border: 2px solid var(--color-accent);
+  border-radius: 4px;
+  background: var(--color-secondary);
+  color: var(--color-white);
+  text-align: center;
+}
+
+.contact-person__map-fallback[hidden] {
+  display: none;
+}
+
+.contact-person__map-fallback p {
+  margin: 0;
+}
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.contact-person__error {
+  padding: 2rem;
+  border-left: 3px solid var(--color-primary);
+  background: var(--color-secondary);
+  color: var(--color-white);
+}
+
+/* =========================================================
+   MOBILE
+   < 800px
+   ========================================================= */
+
+@media (max-width: 799px) {
+  .contact-person {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .contact-person__image {
+    display: flex;
+    justify-content: center;
+  }
+
+  .contact-person__image img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .contact-person__details {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .contact-person__detail {
+    width: 100%;
+  }
+
+  .contact-person__map iframe,
+  .contact-person__map-fallback {
+    height: 280px;
+    min-height: 280px;
+  }
+}
+
+/* =========================================================
+   SMALL DESKTOP
+   800px–1099px
+
+   1. Bild + Intro
+   2. Details
+   3. Standort
+   ========================================================= */
+
+@media (min-width: 800px) and (max-width: 1099px) {
+  .contact-person {
+    grid-template-columns: minmax(220px, 0.4fr) minmax(0, 0.6fr);
+    gap: 2rem;
+  }
+
+  .contact-person__image {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .contact-person__image img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .contact-person__intro {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .contact-person__details {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 2rem;
+  }
+
+  .contact-person__map {
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+
+  .contact-person__map iframe,
+  .contact-person__map-fallback {
+    height: 300px;
+    min-height: 300px;
+  }
+}
+
+/* =========================================================
+   LARGE DESKTOP
+   >= 1100px
+
+   1. Bild + Intro
+   2. Standort + Details
+   ========================================================= */
+
+@media (min-width: 1100px) {
+  .contact-person {
+    grid-template-columns: minmax(280px, 0.4fr) minmax(0, 0.6fr);
+    grid-template-rows: auto auto;
+    column-gap: 3rem;
+    row-gap: 3rem;
+  }
+
+  .contact-person__image {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .contact-person__image img {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .contact-person__intro {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .contact-person__map {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .contact-person__map iframe,
+  .contact-person__map-fallback {
+    height: 320px;
+    min-height: 320px;
+  }
+
+  .contact-person__details {
+    grid-column: 2;
+    grid-row: 2;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: center;
+    gap: 1.5rem;
+  }
+}
