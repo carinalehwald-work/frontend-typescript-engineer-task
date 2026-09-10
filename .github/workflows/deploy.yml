@@ -1,0 +1,70 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Rechte, die die offiziellen Pages-Actions benötigen.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Ein laufendes Deployment nicht abbrechen, aber auch nicht parallel starten.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node.js einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Abhängigkeiten installieren
+        run: npm ci
+
+      - name: TypeScript kompilieren
+        run: npm run build
+
+      # index.html liegt im Repository-Root, die kompilierten Dateien in dist/
+      # und die zur Laufzeit geladenen Templates, Stylesheets und Bilder in src/.
+      # Deshalb wird das Deployment-Verzeichnis aus genau diesen drei Teilen
+      # zusammengesetzt, statt das komplette Arbeitsverzeichnis auszuliefern
+      # (das node_modules/ und .git/ enthalten würde).
+      - name: Deployment-Verzeichnis zusammenstellen
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          cp -r dist _site/dist
+          cp -r src _site/src
+
+      - name: Pages konfigurieren
+        uses: actions/configure-pages@v5
+
+      - name: Artefakt hochladen
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Auf GitHub Pages veröffentlichen
+        id: deployment
+        uses: actions/deploy-pages@v4
