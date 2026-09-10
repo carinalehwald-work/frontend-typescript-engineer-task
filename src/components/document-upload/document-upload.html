@@ -1,0 +1,153 @@
+<section
+  class="document-upload"
+  aria-labelledby="document-upload-title"
+>
+  <header class="document-upload__header">
+
+    <h2 id="document-upload-title">
+      Unterlagen digital einreichen
+    </h2>
+
+    <p class="document-upload__description">
+      Laden Sie Ihre Unterlagen bequem digital hoch. Sie können mehrere
+      Dateien auswählen und anschließend einzeln verwalten.
+    </p>
+  </header>
+
+  <div class="document-upload__content">
+    <label class="document-upload__dropzone">
+      <span
+        class="document-upload__icon"
+        aria-hidden="true"
+      >
+        ↑
+      </span>
+
+      <span class="document-upload__text">
+        <strong>Dateien auswählen</strong>
+        <span>oder Dateien hierher ziehen</span>
+      </span>
+
+      <input
+        class="document-upload__input"
+        type="file"
+        accept=".pdf,.jpg,.jpeg,.png"
+        multiple
+      />
+    </label>
+
+    <p class="document-upload__hint">
+      PDF, JPG oder PNG · maximal 10 MB pro Datei
+    </p>
+
+    <section
+      class="document-upload__pending"
+      aria-labelledby="document-pending-title"
+      hidden
+    >
+      <div class="document-upload__list-header">
+        <div>
+          <h3 id="document-pending-title">
+            Ausgewählte Dateien
+          </h3>
+        </div>
+
+        <span
+          class="document-upload__pending-count"
+          aria-live="polite"
+        >
+          0 Dateien
+        </span>
+      </div>
+
+      <ul class="document-upload__pending-list"></ul>
+    </section>
+
+    <p
+      class="document-upload__message"
+      role="alert"
+      hidden
+    ></p>
+
+    <button
+      class="document-upload__submit"
+      type="button"
+      disabled
+    >
+      Unterlagen hinzufügen
+    </button>
+
+    <section
+      class="document-upload__documents"
+      aria-labelledby="document-list-title"
+      hidden
+    >
+      <div class="document-upload__list-header">
+        <div>
+          <h3 id="document-list-title" tabindex="-1">
+            Hochgeladene Dateien
+          </h3>
+        </div>
+
+        <span
+          class="document-upload__count"
+          aria-live="polite"
+        >
+          0 Dateien
+        </span>
+      </div>
+
+      <ul class="document-upload__list"></ul>
+    </section>
+  </div>
+
+  <!-- DATEI-VORSCHAU -->
+  <dialog
+    class="document-upload__dialog"
+    aria-labelledby="document-preview-title"
+  >
+    <div class="document-upload__dialog-content">
+
+      <div class="document-upload__dialog-header">
+        <h3 id="document-preview-title">
+          Dateivorschau
+        </h3>
+
+        <button
+          class="document-upload__dialog-close"
+          type="button"
+          aria-label="Vorschau schließen"
+        >
+          ×
+        </button>
+      </div>
+
+      <!-- BILD-VORSCHAU -->
+      <img
+        class="document-upload__dialog-image"
+        src=""
+        alt=""
+        hidden
+      />
+
+      <!-- PDF-VORSCHAU -->
+      <iframe
+        class="document-upload__dialog-pdf"
+        title="PDF-Vorschau"
+        hidden
+      ></iframe>
+
+      <!-- Fallback: mobile Browser zeigen PDFs oft nicht im iframe an. -->
+      <a
+        class="document-upload__dialog-link"
+        href=""
+        target="_blank"
+        rel="noopener"
+        hidden
+      >
+        PDF in neuem Tab öffnen
+      </a>
+
+    </div>
+  </dialog>
+</section>
