@@ -1,0 +1,488 @@
+<form class="tax-form" novalidate>
+  <header class="tax-form__header">
+    <div class="tax-form__stepper">
+      <form-stepper></form-stepper>
+    </div>
+  </header>
+
+  <div class="tax-form__content">
+    <!-- Step 0: Introduction -->
+    <section class="tax-form__step" data-step="0" data-step-label="Willkommen">
+      <p class="tax-form__eyebrow">Steuer-Check</p>
+
+      <h2 tabindex="-1" class="tax-form__title">Steuererklärung vorbereiten</h2>
+
+      <p class="tax-form__intro">
+        Beantworten Sie Schritt für Schritt einige Fragen zu Ihrer persönlichen
+        und beruflichen Situation.
+      </p>
+
+      <h3 tabindex="-1">Willkommen beim Steuer-Check</h3>
+
+      <p>
+        Wir führen Sie Schritt für Schritt durch die wichtigsten Angaben für
+        Ihre Steuererklärung.
+      </p>
+
+      <ul>
+        <li>Ihre persönlichen Angaben</li>
+        <li>Ihre berufliche Situation</li>
+        <li>Ihre beruflichen Kosten</li>
+        <li>Eine abschließende Übersicht</li>
+      </ul>
+
+      <p>Sie können Ihre Angaben jederzeit überprüfen und ändern.</p>
+    </section>
+
+    <!-- Step 1: Personal -->
+    <section class="tax-form__step" data-step="1" data-step-label="Persönlich">
+      <h3 tabindex="-1">Persönliche Angaben</h3>
+
+      <p>
+        Einige persönliche Angaben helfen uns dabei, den Steuer-Check auf Ihre
+        Situation abzustimmen.
+      </p>
+
+      <div class="tax-form__field">
+        <div class="tax-form__input">
+          <input
+            id="first-name"
+            name="first-name"
+            type="text"
+            autocomplete="given-name"
+            placeholder="z. B. Carina"
+            required
+          />
+          <label for="first-name">Vorname</label>
+        </div>
+      </div>
+
+      <div class="tax-form__field">
+        <div class="tax-form__input">
+          <input
+            id="last-name"
+            name="last-name"
+            type="text"
+            autocomplete="family-name"
+            placeholder="z. B. Lehwald"
+            required
+          />
+          <label for="last-name">Nachname</label>
+        </div>
+      </div>
+
+      <div class="tax-form__field">
+        <div class="tax-form__input">
+          <input
+            id="birth-date"
+            name="birth-date"
+            type="date"
+            autocomplete="bday"
+            required
+          />
+          <label for="birth-date">Geburtsdatum</label>
+        </div>
+      </div>
+
+      <fieldset class="tax-form__field">
+        <legend>Familienstand</legend>
+
+        <div class="tax-form__options">
+          <label>
+            <input type="radio" name="marital-status" value="single" required />
+            Ledig
+          </label>
+
+          <label>
+            <input type="radio" name="marital-status" value="married" />
+            Verheiratet
+          </label>
+
+          <label>
+            <input type="radio" name="marital-status" value="divorced" />
+            Geschieden
+          </label>
+
+          <label>
+            <input type="radio" name="marital-status" value="widowed" />
+            Verwitwet
+          </label>
+        </div>
+      </fieldset>
+    </section>
+
+    <!-- Step 2: Work -->
+    <section class="tax-form__step" data-step="2" data-step-label="Beruf">
+      <h3 tabindex="-1">Berufliche Situation</h3>
+
+      <p>Jetzt geht es um Ihre berufliche Situation und Ihren Arbeitsweg.</p>
+
+      <fieldset class="tax-form__field">
+        <legend>Wie sind Sie aktuell beschäftigt?</legend>
+
+        <div class="tax-form__options">
+          <label>
+            <input
+              type="radio"
+              name="employment-type"
+              value="employee"
+              required
+            />
+            Angestellt
+          </label>
+
+          <label>
+            <input type="radio" name="employment-type" value="self-employed" />
+            Selbstständig
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="tax-form__field">
+        <div class="tax-form__input">
+          <input
+            id="work-days"
+            name="work-days"
+            type="number"
+            min="1"
+            max="7"
+            inputmode="numeric"
+            placeholder="z. B. 5"
+            required
+          />
+          <label for="work-days"> Arbeitstage pro Woche </label>
+        </div>
+      </div>
+
+      <div class="tax-form__field">
+        <div class="tax-form__input">
+          <input
+            id="homeoffice-days"
+            name="homeoffice-days"
+            type="number"
+            min="0"
+            max="7"
+            inputmode="numeric"
+            value="0"
+            placeholder="z. B. 2"
+            required
+          />
+          <label for="homeoffice-days"> Homeoffice-Tage pro Woche </label>
+        </div>
+      </div>
+
+      <div class="tax-form__field">
+        <label for="commute-distance"> Einfacher Arbeitsweg </label>
+
+        <div>
+          <input
+            id="commute-distance"
+            name="commute-distance"
+            type="range"
+            min="0"
+            max="100"
+            value="10"
+          />
+
+          <output for="commute-distance" aria-live="polite"> 10 km </output>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 3: Costs -->
+    <section class="tax-form__step" data-step="3" data-step-label="Kosten">
+      <h3 tabindex="-1">Berufliche Kosten</h3>
+
+      <p>Erfassen Sie hier Ihre beruflichen Ausgaben für das Jahr.</p>
+
+      <div class="tax-form__cost-groups">
+        <!-- Work equipment -->
+        <details class="tax-form__cost-group">
+          <summary>Arbeitsmittel</summary>
+
+          <div class="tax-form__cost-content">
+            <p class="tax-form__hint">
+              Zum Beispiel Computer, Fachliteratur oder Büromaterial.
+            </p>
+
+            <div class="tax-form__input-row">
+              <div>
+                <div class="tax-form__input">
+                  <input
+                    id="work-equipment-name"
+                    type="text"
+                    placeholder="z. B. Laptop"
+                  />
+                  <label for="work-equipment-name"> Bezeichnung </label>
+                </div>
+              </div>
+
+              <div>
+                <div class="tax-form__input">
+                  <input
+                    id="work-equipment-amount"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    inputmode="decimal"
+                    placeholder="z. B. 899,00"
+                  />
+                  <label for="work-equipment-amount"> Betrag </label>
+                </div>
+              </div>
+
+              <button type="button" data-action="add-equipment">
+                Hinzufügen
+              </button>
+            </div>
+
+            <ul
+              class="tax-form__items"
+              data-equipment-list
+              aria-label="Erfasste Arbeitsmittel"
+            ></ul>
+
+            <p class="tax-form__total" data-equipment-total aria-live="polite">
+              Summe: 0,00 €
+            </p>
+          </div>
+        </details>
+
+        <!-- Training -->
+        <details class="tax-form__cost-group">
+          <summary>Fortbildungskosten</summary>
+
+          <div class="tax-form__cost-content">
+            <p class="tax-form__hint">
+              Zum Beispiel Kurse, Seminare oder berufliche Weiterbildungen.
+            </p>
+
+            <div class="tax-form__input-row">
+              <div>
+                <div class="tax-form__input">
+                  <input
+                    id="training-name"
+                    type="text"
+                    placeholder="z. B. Fachseminar"
+                  />
+                  <label for="training-name"> Bezeichnung </label>
+                </div>
+              </div>
+
+              <div>
+                <div class="tax-form__input">
+                  <input
+                    id="training-amount"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    inputmode="decimal"
+                    placeholder="z. B. 250,00"
+                  />
+                  <label for="training-amount"> Betrag </label>
+                </div>
+              </div>
+
+              <button type="button" data-action="add-training">
+                Hinzufügen
+              </button>
+            </div>
+
+            <ul
+              class="tax-form__items"
+              data-training-list
+              aria-label="Erfasste Fortbildungskosten"
+            ></ul>
+
+            <p class="tax-form__total" data-training-total aria-live="polite">
+              Summe: 0,00 €
+            </p>
+          </div>
+        </details>
+
+        <!-- Other costs -->
+        <details class="tax-form__cost-group">
+          <summary>Sonstige berufliche Kosten</summary>
+
+          <div class="tax-form__cost-content">
+            <p class="tax-form__hint">
+              Weitere beruflich veranlasste Ausgaben.
+            </p>
+
+            <div class="tax-form__input-row">
+              <div>
+                <div class="tax-form__input">
+                  <input
+                    id="other-costs-name"
+                    type="text"
+                    placeholder="z. B. Fachliteratur"
+                  />
+                  <label for="other-costs-name"> Bezeichnung </label>
+                </div>
+              </div>
+
+              <div>
+                <div class="tax-form__input">
+                  <input
+                    id="other-costs-amount"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    inputmode="decimal"
+                    placeholder="z. B. 75,00"
+                  />
+                  <label for="other-costs-amount"> Betrag </label>
+                </div>
+              </div>
+
+              <button type="button" data-action="add-other">Hinzufügen</button>
+            </div>
+
+            <ul
+              class="tax-form__items"
+              data-other-list
+              aria-label="Erfasste sonstige berufliche Kosten"
+            ></ul>
+
+            <p class="tax-form__total" data-other-total aria-live="polite">
+              Summe: 0,00 €
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Step 4: Result -->
+    <section class="tax-form__step" data-step="4" data-step-label="Ergebnis">
+      <div class="tax-form__result">
+        <p class="tax-form__result-status">Steuer-Check abgeschlossen</p>
+
+        <h3 tabindex="-1">Ihre Zusammenfassung</h3>
+
+        <p>
+          Prüfen Sie Ihre Angaben und die erfassten beruflichen Kosten noch
+          einmal. Anschließend können Sie die Zusammenfassung ausdrucken oder
+          als PDF speichern.
+        </p>
+
+        <!-- Personal summary -->
+        <section class="tax-form__summary">
+          <h4>Persönliche Angaben</h4>
+
+          <dl>
+            <div>
+              <dt>Vorname</dt>
+              <dd data-summary="first-name">–</dd>
+            </div>
+
+            <div>
+              <dt>Nachname</dt>
+              <dd data-summary="last-name">–</dd>
+            </div>
+
+            <div>
+              <dt>Geburtsdatum</dt>
+              <dd data-summary="birth-date">–</dd>
+            </div>
+
+            <div>
+              <dt>Familienstand</dt>
+              <dd data-summary="marital-status">–</dd>
+            </div>
+          </dl>
+        </section>
+
+        <!-- Work summary -->
+        <section class="tax-form__summary">
+          <h4>Berufliche Situation</h4>
+
+          <dl>
+            <div>
+              <dt>Beschäftigung</dt>
+              <dd data-summary="employment-type">–</dd>
+            </div>
+
+            <div>
+              <dt>Arbeitstage pro Woche</dt>
+              <dd data-summary="work-days">–</dd>
+            </div>
+
+            <div>
+              <dt>Einfacher Arbeitsweg</dt>
+              <dd data-summary="commute-distance">–</dd>
+            </div>
+
+            <div>
+              <dt>Homeoffice-Tage pro Woche</dt>
+              <dd data-summary="homeoffice-days">–</dd>
+            </div>
+
+            <div>
+              <dt>Entfernungspauschale</dt>
+              <dd data-summary="commute-total">0,00 €</dd>
+            </div>
+
+            <div>
+              <dt>Homeoffice-Pauschale</dt>
+              <dd data-summary="homeoffice-total">0,00 €</dd>
+            </div>
+          </dl>
+        </section>
+
+        <!-- Cost summary -->
+        <section class="tax-form__summary">
+          <h4>Berufliche Kosten</h4>
+
+          <dl>
+            <div>
+              <dt>Arbeitsmittel</dt>
+              <dd data-summary="equipment-total">0,00 €</dd>
+            </div>
+
+            <div>
+              <dt>Fortbildung</dt>
+              <dd data-summary="training-total">0,00 €</dd>
+            </div>
+
+            <div>
+              <dt>Sonstige Kosten</dt>
+              <dd data-summary="other-total">0,00 €</dd>
+            </div>
+          </dl>
+        </section>
+
+        <!-- Calculation -->
+        <section
+          class="tax-form__result-card"
+          aria-labelledby="calculation-title"
+        >
+          <h4 id="calculation-title">Ihre Berechnung</h4>
+
+          <p class="tax-form__result-description">
+            Auf Grundlage Ihrer erfassten Angaben ergibt sich folgende Übersicht
+            der beruflichen Kosten.
+          </p>
+
+          <dl class="tax-form__result-total">
+            <div>
+              <dt>Gesamte berufliche Kosten</dt>
+              <dd data-summary="total-costs">0,00 €</dd>
+            </div>
+          </dl>
+        </section>
+
+        <!-- Information -->
+        <aside class="tax-form__notice">
+          <strong>Hinweis</strong>
+
+          <p>
+            Der Steuer-Check dient als unverbindliche Orientierung und stellt
+            keine vollständige oder verbindliche Steuerberechnung dar.
+          </p>
+        </aside>
+      </div>
+    </section>
+  </div>
+
+  <footer class="tax-form__actions"></footer>
+</form>

@@ -271,3 +271,26 @@ service-tabs > div[role="tablist"] > button > span {
     background: var(--color-dark);
   }
 }
+
+@media print {
+  @page {
+    margin: 18mm;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  tax-form,
+  tax-form * {
+    visibility: visible;
+  }
+
+  tax-form {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
